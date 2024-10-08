@@ -76,8 +76,8 @@ public class Enemy {
 
 	// 적 생성
 	public void makeEnemy() {
-		randomInt = random.nextInt(enem.length);
-		if (SceneManager.stageNum % 10 == 0) {
+		randomInt = random.nextInt(enem.length-1);
+		if (SceneManager.stageNum % 5 == 0) {
 			this.eName = enem[4];
 			this.eHealth = ehealth[4];
 			this.eAttackPower = eattackPower[4];
@@ -93,6 +93,7 @@ public class Enemy {
 
 	// 적 공격
 	public void attack(Character hero) {
+		System.out.println("적 공격");
 		if (hero.getBerrior(hero)) {
 			System.out.println(eName + "의 공격을 방어했습니다.");
 			hero.setBerrior(false);
@@ -107,6 +108,7 @@ public class Enemy {
 
 	// 적 패턴
 	public void setAttackPatterns(String eName) {
+		System.out.println("패턴설정");
 		switch (eName) {
 		case "마법사":
 			attackPatterns.add("Fireball");
@@ -141,6 +143,7 @@ public class Enemy {
 
 	// 적 공격 랜덤으로 하는거
 	public void enemyRandomAttack(Character hero) {
+		System.out.println("랜덤어택");
 		if (hero.getBerrior(hero)) {
 			System.out.println(eName + "의 공격을 방어했습니다.");
 			hero.setBerrior(false);
@@ -161,6 +164,7 @@ public class Enemy {
 
 	// 적군의 체력 감소 메소드 (피해를 받았을 때)
 	public void takeDamage(Character hero) {
+		System.out.println("적 데미지 입는");
 		dmg = hero.getpAttackPower() / ((eBerrior + eBerriorInt) / eBerrior);
 		eHealth -= dmg;
 		if (eHealth <= 0 && !hero.getIsRun()) {

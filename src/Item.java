@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Item {
+
 	private int hpPlus = 50;
 	private int attackPlus = 20;
 	private int berrior = 20;

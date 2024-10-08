@@ -4,7 +4,7 @@ class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		String heroName;
-		System.out.print("공백은 불가능 합니다. 캐릭터의 이름을 입력 해 주세요 :");
+		System.out.println("캐릭터의 이름을 입력 해 주세요.");
 		heroName = sc.next();
 		System.out.println("exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
 		Character hero = new Character(heroName);
@@ -20,7 +20,7 @@ class Main {
 		Boolean isBattleStarted = false;
 		while (true) {
 			String cmd = sc.nextLine();
-			if (cmd.equals("")) {
+			if (!isBattle && cmd.equals("")) {
 				System.out.println("명령어를 입력해 주세요");
 				continue;
 			}
@@ -42,7 +42,7 @@ class Main {
 			if (cmd.equals("item")) {
 				hero.showDropItems();
 			}
-
+			
 			if (cmd.equals("next") && !isBattle) { // 게임 진행
 				isBattle = true;
 				isAttack = false;
@@ -85,6 +85,8 @@ class Main {
 					continue;
 				}
 			} else if (isBattle && cmd.equals("") && isAttack) { // 적군 턴
+				System.out.println("적군턴");
+				System.out.println(isBattle);
 				battle.enemyAttack(enemy);
 				isAttack = false;
 			} else if (isBattle && enemy.geteHealth() <= 0 && (cmd.equals("attack") || cmd.equals(""))) {
