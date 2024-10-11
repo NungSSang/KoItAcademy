@@ -8,11 +8,10 @@ public class Maps {
 	private String stage = "";
 	private int randomNum = 0;
 	String[] maps = { "평지", "산", "마을", "도시" };
-	
+
 	public void makeMap() {
 		randomNum = random.nextInt(maps.length);
 		stage = maps[randomNum];
-		System.out.println(randomNum + "랜덤넘 makeMAp ================");
 	}
 
 	public int getRandomNum() {
@@ -23,7 +22,6 @@ public class Maps {
 		this.randomNum = randomNum;
 	}
 
-	
 	public String getStage() {
 		return stage;
 	}

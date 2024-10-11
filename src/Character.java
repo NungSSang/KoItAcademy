@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Character {
 	private String pName;
 	private int pHealth;
@@ -8,7 +7,7 @@ public class Character {
 	private int pBerrior; // 방어력(스테이지마다 증가할것)
 	private int pBerriorInt; // 방어상수 ( 캐릭터 초기 설정 변하지 않음)
 	private double pDmg;
-	private Boolean Berrior = false;
+	private Boolean berrior = false;
 	private Boolean isRun = false;
 	Enemy enemy;
 	Maps maps;
@@ -17,6 +16,8 @@ public class Character {
 
 	ArrayList<Integer> itemBox = new ArrayList<>();
 	ArrayList<String> dropItemBox = new ArrayList<>();
+	ArrayList<String> mountableItem = new ArrayList<>();
+	ArrayList<String> equippedItem = new ArrayList<>();
 
 	// 생성자: 캐릭터가 생성될 때 기본 속성 설정
 	public Character(String pName) {
@@ -84,12 +85,12 @@ public class Character {
 		this.isRun = isRun;
 	}
 
-	public Boolean getBerrior(Character hero) {
-		return Berrior;
+	public Boolean getberrior(Character hero) {
+		return berrior;
 	}
 
-	public void setBerrior(Boolean berrior) {
-		Berrior = berrior;
+	public void setberrior(Boolean berrior) {
+		this.berrior = berrior;
 	}
 
 	// 캐릭터 정보 출력 메소드
@@ -129,7 +130,7 @@ public class Character {
 				enemy.takeDamage(this);
 			}
 		} else if (skill.equals("4")) {
-			Berrior = true;
+			berrior = true;
 		}
 	}
 
@@ -150,7 +151,7 @@ public class Character {
 	public void useItem() {
 		if (isRun) {
 			System.out.println("도망쳤기 때문에 아이템을 획득할 수 없습니다.");
-			isRun = true;
+			isRun = false;
 		} else {
 			Item items = new Item();
 			System.out.println(items.items2);
@@ -176,10 +177,4 @@ public class Character {
 		}
 	}
 
-	public void addDropItems() {
-		item.dropItems(this,enemy);
-	}
-	public void showDropItems() {
-		System.out.println(dropItemBox);
-	}
 }

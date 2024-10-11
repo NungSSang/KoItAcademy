@@ -17,7 +17,8 @@ public class Enemy {
 	int[] ehealth = { 100, 110, 120, 110, 150 };
 	int[] eattackPower = { 10, 10, 10, 20, 30 };
 	private ArrayList<String> attackPatterns;
-	public Enemy(String eName , Character hero) {
+
+	public Enemy(String eName, Character hero) {
 		this.eBerrior = 10;
 		this.eBerriorInt = 0;
 		this.attackPatterns = new ArrayList<>();
@@ -28,7 +29,6 @@ public class Enemy {
 	public String geteName() {
 		return eName;
 	}
-
 
 	public void seteName(String eName) {
 		this.eName = eName;
@@ -76,7 +76,7 @@ public class Enemy {
 
 	// 적 생성
 	public void makeEnemy() {
-		randomInt = random.nextInt(enem.length-1);
+		randomInt = random.nextInt(enem.length - 1);
 		if (SceneManager.stageNum % 5 == 0) {
 			this.eName = enem[4];
 			this.eHealth = ehealth[4];
@@ -93,12 +93,11 @@ public class Enemy {
 
 	// 적 공격
 	public void attack(Character hero) {
-		System.out.println("적 공격");
-		if (hero.getBerrior(hero)) {
+		if (hero.getberrior(hero)) {
 			System.out.println(eName + "의 공격을 방어했습니다.");
-			hero.setBerrior(false);
+			hero.setberrior(false);
 			System.out.println("기본공격 = attack , 스킬 = skill 을 입력하여 공격할 수 있습니다.");
-		} else if (!hero.getBerrior(hero) && eHealth >= 0) {
+		} else if (!hero.getberrior(hero) && eHealth >= 0) {
 			System.out.println(eName + "이(가) " + eAttackPower + "의 데미지를 줍니다.");
 			hero.takeDamage(this);
 		} else if (eHealth <= 0) {
@@ -108,7 +107,6 @@ public class Enemy {
 
 	// 적 패턴
 	public void setAttackPatterns(String eName) {
-		System.out.println("패턴설정");
 		switch (eName) {
 		case "마법사":
 			attackPatterns.add("Fireball");
@@ -143,10 +141,9 @@ public class Enemy {
 
 	// 적 공격 랜덤으로 하는거
 	public void enemyRandomAttack(Character hero) {
-		System.out.println("랜덤어택");
-		if (hero.getBerrior(hero)) {
+		if (hero.getberrior(hero)) {
 			System.out.println(eName + "의 공격을 방어했습니다.");
-			hero.setBerrior(false);
+			hero.setberrior(false);
 			System.out.println("기본공격 = attack , 스킬 = skill 을 입력하여 공격할 수 있습니다.");
 		} else {
 			int randomPattern = random.nextInt(attackPatterns.size());
@@ -164,7 +161,6 @@ public class Enemy {
 
 	// 적군의 체력 감소 메소드 (피해를 받았을 때)
 	public void takeDamage(Character hero) {
-		System.out.println("적 데미지 입는");
 		dmg = hero.getpAttackPower() / ((eBerrior + eBerriorInt) / eBerrior);
 		eHealth -= dmg;
 		if (eHealth <= 0 && !hero.getIsRun()) {
@@ -174,8 +170,8 @@ public class Enemy {
 			} else {
 				System.out.println("성공적으로 도망쳤습니다!");
 				System.out.println("Next를 입력해 진행해주세요.");
+				hero.setIsRun(true);
 			}
-//			hero.setIsRun(false);
 		} else if (eHealth >= 0 && hero.getpHealth() >= 0) {
 			System.out.println(eName + "이(가) " + dmg + "의 피해를 입었습니다." + eHealth + " 의 체력이 남았습니다.");
 			System.out.println(eName + "이(가) 공격할 차례 입니다.");
@@ -185,14 +181,12 @@ public class Enemy {
 
 	// 적 사망
 	public void enemyDie() {
-		 if (hero != null) { 
-	            System.out.println(eName + "의 체력이 0이 되었습니다. 적군을 쓰러트렸습니다.");
-	            System.out.println("next를 입력하여 로비로");
-	        } else {
-	            System.out.println("Hero 객체가 없습니다.");
-	        }
+		if (hero != null) {
+			System.out.println(eName + "의 체력이 0이 되었습니다. 적군을 쓰러트렸습니다.");
+			System.out.println("next를 입력하여 로비로");
+		} else {
+			System.out.println("Hero 객체가 없습니다.");
+		}
 	}
-
-
 
 }
