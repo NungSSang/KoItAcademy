@@ -8,4 +8,6 @@ public class Text {
 	public void finish() {
 		System.out.println("축하합니다 모두 클리어 하셨습니다.");
 	}
+	
+
 }

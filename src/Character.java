@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Character {
 	private String pName;
 	private int pHealth;

@@ -22,8 +22,9 @@ class Main {
 				System.out.println("명령어를 입력해 주세요");
 				System.out.println("exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
 				continue;
-			}else if(cmd.equals("cmd")) {
-				System.out.println("cmd: 명령어 확인 / exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
+			} else if (cmd.equals("cmd")) {
+				System.out.println(
+						"cmd: 명령어 확인 / exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
 			}
 			if (cmd.equals("exit")) {
 				System.out.println("게임을 종료합니다.");
