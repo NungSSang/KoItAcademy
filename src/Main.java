@@ -16,15 +16,16 @@ class Main {
 		Boolean isBattle = false;
 		Boolean isAttack = false;
 		Boolean isBattleStarted = false;
+
 		while (true) {
 			String cmd = sc.nextLine();
 			if (!isBattle && cmd.equals("")) {
 				System.out.println("명령어를 입력해 주세요");
-				System.out.println("exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
+				System.out.println("exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 / item : 아이템 관리");
 				continue;
 			} else if (cmd.equals("cmd")) {
 				System.out.println(
-						"cmd: 명령어 확인 / exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 ");
+						"cmd: 명령어 확인 / exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 / item : 아이템 관리 ");
 			}
 			if (cmd.equals("exit")) {
 				System.out.println("게임을 종료합니다.");
@@ -94,6 +95,5 @@ class Main {
 			}
 
 		}
-
 	}
 }
