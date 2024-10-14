@@ -168,11 +168,11 @@ public class Item {
 		itemEquip = false;
 	}
 
-	private void removeSpecificOccurrences(ArrayList<String> dropItemBox, String element, int count, Character hero) {
+	private void removeSpecificOccurrences(ArrayList<String> dropItemBox, String itemName, int count, Character hero) {
 		int removedCount = 0;
 		// ArrayList를 반복하면서 요소 제거
 		for (int i = 0; i < hero.dropItemBox.size(); i++) {
-			if (hero.dropItemBox.get(i).equals(element)) {
+			if (hero.dropItemBox.get(i).equals(itemName)) {
 				hero.dropItemBox.remove(i);
 				removedCount++;
 				i--; // remove 후 인덱스 조정

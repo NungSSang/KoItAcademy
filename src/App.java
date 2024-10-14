@@ -1,0 +1,125 @@
+import java.util.Scanner;
+
+public class App {
+
+	public void run() {
+		Scanner sc = new Scanner(System.in);
+		String heroName;
+		System.out.print("캐릭터명은 공백이 불가능 합니다 \n캐릭터의 이름을 입력 해 주세요: ");
+		heroName = sc.next();
+		Character hero = new Character(heroName);
+		Enemy enemy = new Enemy("", hero);
+		Item item = new Item();
+		Battle battle = new Battle(hero, enemy);
+		System.out.println("캐릭터가 생성되었습니다.");
+		hero.printStatus();
+		SceneManager scene = new SceneManager();
+		Boolean isBattle = false;
+		Boolean isAttack = false;
+		Boolean isBattleStarted = false;
+
+		// 캐릭터 = 스테이지 종료시 선택 아이템 , 적 드랍 아이템 , 장착 가능한 아이템 , 장착된 아이템
+		// 캐릭터: 공격, 데미지 입음, 사망, 아이템 선택 , 정보출력 // itemBox{}, dropItemBox{},
+		// mountableItem{}, equippedItem{}
+		// 적 = attackPatterns{} , enem[] , ehealth[] , eattackPower[]
+		// 적: 적군 생성 ,적군 공격 패턴 , 패턴중 하나 가져와서 공격 ,적군 데미지 입음 , 사망 , 정보출력
+		// 아이템 items2 <- 스테이지 종료 아이템
+		// 아이템 = 적 처치시 아이템 드랍 , 보유 재료 아이템 , 장착할 수 있는 아이템 , 장착된 아이템 출력 , 아이템 제작 , 아이템 소모시
+		// 캐릭터가 보유중인 재료 아이템 제거 , 나머지 while 문
+		// 맵 = maps[]
+
+		// 명령어를 받는곳
+		// 명령어를 확인해서 처리를 하는곳
+		// 처리 하는곳에서 데이터에 접근해야 한다면 데이터를 처리할 수 있는 곳으로 넘겨주는 곳
+		// 데이터를 처리하는곳
+		// 데이터
+		// 가져오거나 저장한 데이터를 넘겨주는 곳
+		// 넘겨받은 데이터를 처리한 곳으로 넘겨주는 곳
+		// 데이터를 처리한곳에서 사용
+		// 명령어를 받는곳
+		
+		
+		
+		while (true) {
+			String cmd = sc.nextLine();
+			if (!isBattle && cmd.equals("")) {
+				System.out.println("명령어를 입력해 주세요");
+				System.out.println(
+						"exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 / item : 아이템 관리");
+				continue;
+			} else if (cmd.equals("cmd")) {
+				System.out.println(
+						"cmd: 명령어 확인 / exit: 게임 종료 / next: 게임 진행 / showme: 캐릭터 정보 / attack: 공격 / 엔터누름 : 전투 진행 / item : 아이템 관리 ");
+				if (cmd.equals("exit")) {
+					System.out.println("게임을 종료합니다.");
+					break;
+				} else if (hero.getpHealth() <= 0) {
+					System.out.println("게임을 종료합니다.");
+					break;
+				} else if (cmd.equals("back")) {
+					continue;
+				} else if (cmd.equals("showme") && isAttack) { // 아군 캐릭터 프로필
+					isAttack = false;
+					hero.printStatus();
+				}
+				if (cmd.equals("item")) {
+					item.itemController(hero);
+				}
+				if (cmd.equals("next") && !isBattle) { // 게임 진행
+					isBattle = true;
+					isAttack = false;
+					hero.useItem();
+					System.out.println("battle을 입력하여 전투 진입");
+					continue;
+				} else if (!isBattleStarted && (cmd.equals("attack") || cmd.equals("skill"))) {
+					System.out.println("전투를 시작하지 않았습니다. 전투를 시작합니다.");
+					scene.playeGame();
+					enemy.makeEnemy();
+					enemy.printStatus();
+					isBattleStarted = true; // 전투 시작 플래그 설정
+					continue;
+				} else if (isBattle && cmd.equals("battle") && !isBattleStarted) { // 전투 시작
+					scene.playeGame();
+					enemy.makeEnemy();
+					enemy.printStatus();
+					isBattleStarted = true; // 전투가 시작되었음을 표시
+					continue;
+				}
+				// 기본 공격
+				if (isBattle && enemy.geteHealth() >= 0 && cmd.equals("attack") && isBattleStarted && !isAttack) {
+					isAttack = true;
+					battle.playerAttack(enemy); // 기본 공격
+					if (enemy.geteHealth() <= 0) {
+						item.dropItems(hero, enemy);
+						isAttack = true;
+						isBattle = false;
+						isBattleStarted = false; // 전투 종료 후 전투 시작 상태 초기화
+						continue;
+					} // 스킬 공격
+				} else if (isBattle && enemy.geteHealth() >= 0 && cmd.equals("skill") && isBattleStarted && !isAttack) {
+					isAttack = true;
+					battle.playerSkillAttack(enemy); // 스킬 공격
+					if (enemy.geteHealth() <= 0) {
+						if (!hero.getIsRun()) {
+							item.dropItems(hero, enemy);
+						}
+						isAttack = true;
+						isBattle = false;
+						isBattleStarted = false; // 전투 종료 후 전투 시작 상태 초기화
+						continue;
+					}
+				} else if (isBattle && cmd.equals("") && isAttack) { // 적군 턴
+					battle.enemyAttack(enemy);
+					isAttack = false;
+				} else if (isBattle && enemy.geteHealth() <= 0 && (cmd.equals("attack") || cmd.equals(""))) {
+					isAttack = false;
+					System.out.println("의미없는 클릭");
+					continue;
+				}
+
+			}
+			sc.close();
+		}
+
+	}
+}

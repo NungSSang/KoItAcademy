@@ -169,7 +169,7 @@ public class Enemy {
 			if (eName == "용") {
 			} else {
 				System.out.println("성공적으로 도망쳤습니다!");
-				System.out.println("Next를 입력해 진행해주세요.");
+				System.out.println("다음 전투: next / 아이템 보기: item");
 				hero.setIsRun(true);
 			}
 		} else if (eHealth >= 0 && hero.getpHealth() >= 0) {
