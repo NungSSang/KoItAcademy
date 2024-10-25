@@ -126,7 +126,7 @@ public class Item {
 		itemMake = false;
 	}
 
-	private void equipInven(Character hero) { // 장착할 수 있는 아이템이 있는지 체크하고 장비를 장착하는 메서드
+	public void equipInven(Character hero) { // 장착할 수 있는 아이템이 있는지 체크하고 장비를 장착하는 메서드
 		if (hero.mountableItem.size() == 0) {
 			System.out.println("장착할 수 있는 아이템이 없습니다.");
 		} else {
@@ -186,64 +186,64 @@ public class Item {
 	public void itemController(Character hero) {
 		System.out.printf(
 				"cmd : 명령어 확인\nback: 게임으로 돌아가기\n재료아이템 목록: 재료 아이템 목록\n장비아이템 목록: 장착 가능한 아이템 목록\n장착아이템 목록: 장착한 아이템 목록\n아이템 장착:아이템 장착\n아이템 제작: 아이템 제작\n");
-		while (true) {
-
-			String cmd = sc.nextLine();
-			if (cmd.equals("back")) {
-				break;
-			} else if (cmd.equals("cmd")) {
-				System.out.printf(
-						"cmd : 명령어 확인\nback: 게임으로 돌아가기\n재료아이템 목록: 재료 아이템 목록\n장비아이템 목록: 장착 가능한 아이템 목록\n장착아이템 목록: 장착한 아이템 목록\n아이템 장착:아이템 장착\n아이템 제작: 아이템 제작\n");
-			} else if (cmd.equals("")) {
-				System.out.println("명령어를 입력 해 주세요.");
-			}
-			if (cmd.equals("재료아이템 목록")) {
-				showItem(hero);
-				continue;
-			} else if (cmd.equals("장비아이템 목록")) {
-				if (hero.mountableItem.size() == 0) {
-					System.out.println("장비아이템이 없습니다.");
-				} else {
-					System.out.println(hero.mountableItem);
-				}
-
-			} else if (cmd.equals("장착아이템 목록")) {
-				if (hero.equippedItem.size() == 0) {
-					System.out.println("장착한 아이템이 없습니다.");
-				} else {
-					System.out.println(hero.equippedItem);
-				}
-			}
-
-			if (cmd.equals("레시피")) {
-				System.out.print("아이템을 제작할 수 있습니다.\n마법사의 로브 1개 , 엔트의 사과 1개를 사용해서 마법사의 황금사과를 만들 수 있습니다.\n");
-				System.out.println("전사의 몽둥이 1개 , 괴물의 이빨 2개를 사용해서 이빨장식 몽둥이를 만들 수 있습니다.");
-				System.out.println("전사의 몽둥이 1개 , 용의 이빨을 사용해서 드래곤 소드를 만들 수 있습니다.");
-				System.out.println("만들고 싶은 아이템의 이름을 입력 해 주세요.");
-				continue;
-			}
-			if (cmd.equals("아이템 제작")) {
-				System.out.printf("마법사의 황금사과\n이빨장식 몽둥이\n드래곤 소드\n");
-				System.out.printf("제작할 아이템의 이름을 입력해 주세요: ");
-				itemMake = true;
-			}
-			if (cmd.equals("마법사의 황금사과") && !itemEquip && itemMake) {
-				makeItem(hero, 0);
-			} else if (cmd.equals("이빨장식 몽둥이") && !itemEquip && itemMake) {
-				makeItem(hero, 1);
-			} else if (cmd.equals("드래곤 소드") && !itemEquip && itemMake) {
-				makeItem(hero, 2);
-			}
-
-			if (cmd.equals("아이템 장착")) {
-				itemEquip = true;
-				if (itemEquip) {
-					equipInven(hero);
-				}
-				continue;
-			}
-
-		}
+//		while (true) {
+//
+//			String cmd = sc.nextLine();
+//			if (cmd.equals("back")) {
+//				break;
+//			} else if (cmd.equals("cmd")) {
+//				System.out.printf(
+//						"cmd : 명령어 확인\nback: 게임으로 돌아가기\n재료아이템 목록: 재료 아이템 목록\n장비아이템 목록: 장착 가능한 아이템 목록\n장착아이템 목록: 장착한 아이템 목록\n아이템 장착:아이템 장착\n아이템 제작: 아이템 제작\n");
+//			} else if (cmd.equals("")) {
+//				System.out.println("명령어를 입력 해 주세요.");
+//			}
+//			if (cmd.equals("재료아이템 목록")) {
+//				showItem(hero);
+//				continue;
+//			} else if (cmd.equals("장비아이템 목록")) {
+//				if (hero.mountableItem.size() == 0) {
+//					System.out.println("장비아이템이 없습니다.");
+//				} else {
+//					System.out.println(hero.mountableItem);
+//				}
+//
+//			} else if (cmd.equals("장착아이템 목록")) {
+//				if (hero.equippedItem.size() == 0) {
+//					System.out.println("장착한 아이템이 없습니다.");
+//				} else {
+//					System.out.println(hero.equippedItem);
+//				}
+//			}
+//
+//			if (cmd.equals("레시피")) {
+//				System.out.print("아이템을 제작할 수 있습니다.\n마법사의 로브 1개 , 엔트의 사과 1개를 사용해서 마법사의 황금사과를 만들 수 있습니다.\n");
+//				System.out.println("전사의 몽둥이 1개 , 괴물의 이빨 2개를 사용해서 이빨장식 몽둥이를 만들 수 있습니다.");
+//				System.out.println("전사의 몽둥이 1개 , 용의 이빨을 사용해서 드래곤 소드를 만들 수 있습니다.");
+//				System.out.println("만들고 싶은 아이템의 이름을 입력 해 주세요.");
+//				continue;
+//			}
+//			if (cmd.equals("아이템 제작")) {
+//				System.out.printf("마법사의 황금사과\n이빨장식 몽둥이\n드래곤 소드\n");
+//				System.out.printf("제작할 아이템의 이름을 입력해 주세요: ");
+//				itemMake = true;
+//			}
+//			if (cmd.equals("마법사의 황금사과") && !itemEquip && itemMake) {
+//				makeItem(hero, 0);
+//			} else if (cmd.equals("이빨장식 몽둥이") && !itemEquip && itemMake) {
+//				makeItem(hero, 1);
+//			} else if (cmd.equals("드래곤 소드") && !itemEquip && itemMake) {
+//				makeItem(hero, 2);
+//			}
+//
+//			if (cmd.equals("아이템 장착")) {
+//				itemEquip = true;
+//				if (itemEquip) {
+//					equipInven(hero);
+//				}
+//				continue;
+//			}
+//
+//		}
 
 	}
 
